@@ -298,7 +298,7 @@ void intro()
 {
     cout<<"\n\n\n\t\t\t\tREPORT CARD GENERATOR";
     cout<<"\n\n\n\tMade By:";
-    cout<<endl<<"\t18121A1205"<<endl<<"\t18121A1260"<<endl<<"\t18121A1245"<<endl<<"\t18121A1245";
+    cout<<endl<<"\t18121A1205"<<endl<<"\t18121A1260"<<endl<<"\t18121A1254"<<endl<<"\t18121A1245";
     cout<<"\n\n\tDepartment of Information Technology\n\tSree Vidyanikethan Engineering College";
     cout<<"\n\n\n\tPress Enter To Continue\n\n";
     cin.get();
