@@ -3,7 +3,7 @@
 #include<iomanip>
 
 using namespace std;
-string filename = "/Users/rishmithak/Desktop/student.dat";
+string filename = "student.dat";
 
 class student
 {
