@@ -3,6 +3,7 @@
 #include<iomanip>
 
 using namespace std;
+string filename = "/Users/rishmithak/Desktop/student.dat";
 
 class student
 {
@@ -17,9 +18,24 @@ public:
     void showdata() const; //function to show data on screen
     void show_tabular() const;
     int retrollno() const;
+    void fileWrite();
 }; //class ends here
 
-
+void student::fileWrite(){
+    ofstream outFile;
+    outFile.open("final.txt",ios::app);
+    outFile<<"\nRoll number of the student : "<<rollno;
+    outFile<<"\nName of student : "<<name;
+    outFile<<"\nMarks in Physics : "<<p_marks;
+    outFile<<"\nMarks in Chemistry : "<<c_marks;
+    outFile<<"\nMarks in Maths : "<<m_marks;
+    outFile<<"\nMarks in English : "<<e_marks;
+    outFile<<"\nMarks in Computer Science :"<<cs_marks;
+    outFile<<"\nPercentage of student is  :"<<per;
+    outFile<<"\nGrade of student is :"<<grade;
+    outFile<<"\n********************************************\n";
+    
+}
 void student::calculate()
 {
     per=(p_marks+c_marks+m_marks+e_marks+cs_marks)/5.0;
@@ -85,7 +101,8 @@ void delete_student(int); //accept rollno and delete selected records from binar
 void class_result(); //display all records in tabular format from binary file
 void result(); //display result menu
 void intro(); //display welcome screen
-void entry_menu(); //display entry menu on screen
+void entry_menu();//display entry menu on screen
+void finalData();
 
 int main()
 {
@@ -109,6 +126,7 @@ int main()
             case '2': entry_menu();
                 break;
             case '3':
+                finalData();
                 break;
             default :cout<<"\a";
         }
@@ -120,7 +138,7 @@ void write_student()
 {
     student st;
     ofstream outFile;
-    outFile.open("student.dat",ios::binary|ios::app);
+    outFile.open(filename,ios::binary|ios::app);
     st.getdata();
     outFile.write(reinterpret_cast<char *> (&st), sizeof(student));
     outFile.close();
@@ -133,7 +151,7 @@ void display_all()
 {
     student st;
     ifstream inFile;
-    inFile.open("student.dat",ios::binary);
+    inFile.open(filename,ios::binary);
     if(!inFile)
     {
         cout<<"File open failed!\n<Press Enter>\n";
@@ -156,7 +174,7 @@ void display_sp(int n)
 {
     student st;
     ifstream inFile;
-    inFile.open("student.dat",ios::binary);
+    inFile.open(filename,ios::binary);
     if(!inFile)
     {
         cout<<"File open failed!\n<Press Enter>\n";
@@ -185,7 +203,7 @@ void modify_student(int n)
     bool found=false;
     student st;
     fstream File;
-    File.open("student.dat",ios::binary|ios::in|ios::out);
+    File.open(filename,ios::binary|ios::in|ios::out);
     if(!File)
     {
         cout<<"File open failed!\n<Press Enter>\n";
@@ -220,7 +238,7 @@ void delete_student(int n)
 {
     student st;
     ifstream inFile;
-    inFile.open("student.dat",ios::binary);
+    inFile.open(filename,ios::binary);
     if(!inFile)
     {
         cout<<"File open failed!\n<Press Enter>\n";
@@ -251,7 +269,7 @@ void class_result()
 {
     student st;
     ifstream inFile;
-    inFile.open("student.dat",ios::binary);
+    inFile.open(filename,ios::binary);
     if(!inFile)
     {
         cout<<"File open failed!\n<Press Enter>\n";
@@ -303,6 +321,23 @@ void intro()
     cout<<"\n\n\tDepartment of Information Technology\n\tSree Vidyanikethan Engineering College";
     cout<<"\n\n\n\t<Press Enter>\n\n";
     cin.get();
+}
+
+void finalData(){
+    student obj;
+    ofstream outFile;
+    outFile.open("final.txt",ios::out);
+    ifstream inFile;
+    inFile.open(filename,ios::binary);
+    if(!inFile)
+    {
+        cout<<"input file not found! Fatal error";
+        exit(0);
+    }
+    while(inFile.read(reinterpret_cast<char *> (&obj), sizeof(student)))
+    {
+        obj.fileWrite();
+    }
 }
 
 void entry_menu()
